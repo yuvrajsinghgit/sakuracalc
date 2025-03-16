@@ -13,9 +13,21 @@ function appendToDisplay(value) {
   
   function calculateResult() {
     try {
-      document.getElementById('display').value = eval(document.getElementById('display').value);
+      const display = document.getElementById('display');
+      const result = eval(display.value);
+      document.getElementById('copyOutput').value = `${display.value} = ${result}`;
+      display.value = result;
     } catch {
       document.getElementById('display').value = 'Error';
+      document.getElementById('copyOutput').value = '';
     }
+  }
+  
+  
+  function copyCalculation() {
+    const copyField = document.getElementById("copyOutput");
+    copyField.select();
+    copyField.setSelectionRange(0, 99999); // For mobile
+    navigator.clipboard.writeText(copyField.value);
   }
   
